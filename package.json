@@ -1,5 +1,5 @@
 {
-  "name": "oqx/worker-hooks",
+  "name": "@oqx/worker-hooks",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
