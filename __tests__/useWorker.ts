@@ -2,7 +2,7 @@ import { act, cleanup } from '@testing-library/react'
 import { useWorker } from '../src'
 import { renderHook } from '@testing-library/react-hooks'
 import { createWorker } from '../src/utils'
-import '@react-frontend-developer/jsdom-worker'
+import '../__mocks__/worker'
 
 const DATA = {
     hello: 'world'
@@ -10,8 +10,8 @@ const DATA = {
 
 afterEach(cleanup)
 
-describe('useWorker', () => {
-    it('initialize a Worker', () => {
+describe('Test worker functions', () => {
+    it('initialize a Worker with createWorker', () => {
         const cb = () => {
             return DATA
         }

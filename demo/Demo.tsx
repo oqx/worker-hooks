@@ -5,8 +5,8 @@ import { Comments } from './Comments/Comments'
 
 const Demo: React.FunctionComponent<{}> = () => {
     useEffect(() => {
-        let promise = new Promise(resolve => resolve(iterations({ num: 5 })))
-        promise.then(() => {
+        Promise.resolve().then(() => {
+            iterations({ num: 5 })
             console.log('Done.')
         })
     }, [])

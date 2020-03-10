@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WorkerHooks Example</title>
     <style>
+
 *,
 *::before *::after {
   box-sizing: border-box;
@@ -160,206 +161,80 @@ button, input, select, textarea {
   box-sizing: border-box;
 }
 
-
-.container {
-  margin: 20px;
-  width: calc(100% - 40px);
-  height: auto;
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
-/* button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-} */
+.loader {
+  position: relative;
+  margin: 0 auto;
+  width: 120px;
+  }
 
-.loading-overlay {
+.loader:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0);
-  transition: background-color .2s ease-out;
-}
-
-.loading-anim {
-  position: relative;
-  width: 200px;
-  height: 200px;
+  right: 0;
   margin: auto;
-  perspective: 800px;
-  transform-style: preserve-3d;
-  transform: translateZ(-100px) rotateY(-90deg) rotateX(90deg) rotateZ(90deg) scale(0.5);
-  opacity: 0;
-  transition: all .2s ease-out;
-}
-.loading-anim .circle {
-  width: 100%;
-  height: 100%;
-  animation: spin 5s linear infinite;
-}
-.loading-anim .border {
-  position: absolute;
-  border-radius: 50%;
-  border: 3px solid #e34981;
-}
-.loading-anim .out {
-  top: 15%;
-  left: 15%;
-  width: 70%;
-  height: 70%;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  animation: spin 2s linear reverse infinite;
-}
-.loading-anim .in {
-  top: 18%;
-  left: 18%;
-  width: 64%;
-  height: 64%;
-  border-top-color: transparent;
-  border-bottom-color: transparent;
-  animation: spin 2s linear infinite;
-}
-.loading-anim .mid {
-  top: 40%;
-  left: 40%;
-  width: 20%;
-  height: 20%;
-  border-left-color: transparent;
-  border-right-color: transparent;
-  animation: spin 1s linear infinite;
 }
 
-.loading .loading-anim {
-  transform: translateZ(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg) scale(1);
-  opacity: 1;
+.path {
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+  stroke-linecap: round;
 }
 
-.loading .loading-overlay {
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.dot {
-  position: absolute;
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #e34981;
-  animation: jitter 5s ease-in-out infinite, fade-in-out 5s linear infinite;
-}
-
-.dot:nth-child(1) {
-  top: 90px;
-  left: 180px;
-  animation-delay: 0s;
-}
-
-.dot:nth-child(2) {
-  top: 135px;
-  left: 168px;
-  animation-delay: 0.41667s;
-}
-
-.dot:nth-child(3) {
-  top: 168px;
-  left: 135px;
-  animation-delay: 0.83333s;
-}
-
-.dot:nth-child(4) {
-  top: 180px;
-  left: 90px;
-  animation-delay: 1.25s;
-}
-
-.dot:nth-child(5) {
-  top: 168px;
-  left: 45px;
-  animation-delay: 1.66667s;
-}
-
-.dot:nth-child(6) {
-  top: 135px;
-  left: 12px;
-  animation-delay: 2.08333s;
-}
-
-.dot:nth-child(7) {
-  top: 90px;
-  left: 0px;
-  animation-delay: 2.5s;
-}
-
-.dot:nth-child(8) {
-  top: 45px;
-  left: 12px;
-  animation-delay: 2.91667s;
-}
-
-.dot:nth-child(9) {
-  top: 12px;
-  left: 45px;
-  animation-delay: 3.33333s;
-}
-
-.dot:nth-child(10) {
-  top: 0px;
-  left: 90px;
-  animation-delay: 3.75s;
-}
-
-.dot:nth-child(11) {
-  top: 12px;
-  left: 135px;
-  animation-delay: 4.16667s;
-}
-
-.dot:nth-child(12) {
-  top: 45px;
-  left: 168px;
-  animation-delay: 4.58333s;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
+@keyframes rotate {
+  100% {
     transform: rotate(360deg);
   }
 }
-@keyframes jitter {
+
+@keyframes dash {
   0% {
-    transform: scale(1, 1);
-  }
-  25% {
-    transform: scale(0.7, 0.7);
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
   }
   50% {
-    transform: scale(1, 1);
-  }
-  75% {
-    transform: scale(1.3, 1.3);
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
   }
   100% {
-    transform: scale(1, 1);
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
   }
 }
-@keyframes fade-in-out {
+
+@keyframes color {
+  100%,
   0% {
-    opacity: 0.8;
+    stroke: #f242f5;
   }
-  25% {
-    opacity: 0.2;
+  40% {
+    stroke: #f242f5;
   }
-  75% {
-    opacity: 1;
+  66% {
+    stroke: #f242f5;
   }
-  100% {
-    opacity: 0.8;
+  80%,
+  90% {
+    stroke: #f242f5;
   }
 }
 

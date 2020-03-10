@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useWorkerCallback } from '../../src'
 import { getComments } from '../workers/comments.worker'
+import Loading from '../loading'
 
 export const _CommentsWorkers = () => {
     const [comments, setComments] = useState()
@@ -20,7 +21,7 @@ export const _CommentsWorkers = () => {
     }, [])
 
     if (loading || !comments) {
-        return <div>loading...</div>
+        return <Loading />
     }
 
     return (
